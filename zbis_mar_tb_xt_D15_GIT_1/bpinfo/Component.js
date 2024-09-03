@@ -43,7 +43,7 @@ sap.ui.define(["sap/ui/core/UIComponent",
 				var sId = "application-" + sSemanticObject + "-" + sAction + "-component---object--alertHeaderReopenButton";
 				// var mainModel = sap.ui.getCore().byId("application-ComplianceAlert-manage-component---object--alertHeaderReopenButton").getModel();
 				try {
-					var mainModel = sap.ui.getCore().byId(sID).getModel();
+					var mainModel = sap.ui.getCore().byId(sId).getModel();
 
 					mainModel.attachBatchRequestCompleted(function (oEvent) {
 						// Check if the batch request is completed
