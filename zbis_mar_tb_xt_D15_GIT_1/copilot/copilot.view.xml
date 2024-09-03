@@ -1,0 +1,269 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"  xmlns="sap.m" xmlns:c="sap.suite.ui.microchart" xmlns:l="sap.ui.layout" xmlns:s="sap.ui.comp.smartfield" xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartForm="sap.ui.comp.smartform" controllerName="copilot.copilot" height="100%">
+   <App>
+      <Page id="coPilotPage"
+       title="{pf9>/CompanyName}, {pf9>/Street}, {pf9>/City} {pf9>/PostalCode}, {pf9>/Country}">
+       <FlexBox id="_IDGenFlexBox1"  class="myFlexContainer">
+       <HBox>
+         <IconTabBar id="idIconTabBar" select=".onFilterSelect" class="sapUiResponsiveContentPadding flexItem">
+            <items>
+               <IconTabFilter id="confirmId" icon="sap-icon://begin" design="Horizontal" text="Confirm Ok" key="Match" />
+               <IconTabSeparator />
+               <IconTabFilter id="bingId" icon="sap-icon://search" design="Horizontal" text="Open Search" key="OpenSearch" visible="true"/>
+            </items>
+            <content>
+               <Table id="smartTable" items="{pf2>/}" headerText="Match Entities" showSeparators="Inner" selectionChange="onSelectionChange">
+                  <columns>
+                     <Column width="25%">
+                        <Text text="Name" />
+                     </Column>
+                     <Column>
+                        <Text text="Country" />
+                     </Column>
+                     
+                     <Column>
+                        <Text text="City" />
+                     </Column>
+                     <Column>
+                        <Text text="Postcode" />
+                     </Column>
+
+                     <Column>
+                        <Text text="Phone/Fax" />
+                     </Column>
+                     <Column>
+                        <Text text="Email/Website" />
+                     </Column>
+                     <Column>
+                        <Text text="Moody's ID" />
+                     </Column>
+                     <Column>
+                        <Text text="Match Score" />
+                     </Column>
+                     
+                  </columns>
+                  <items>
+                     <ColumnListItem type="Navigation" press="onListItemPress">
+                        <cells>
+                             <VBox>
+                              <ObjectIdentifier title="{pf2>MatchedName}">
+                                 <layoutData>
+                                 <FlexItemData growFactor="1" />
+                                 </layoutData>
+                              </ObjectIdentifier>
+                              <Text text="{pf2>Name}" />
+                              <Text text="{pf2>Address}" />
+                           </VBox>
+                           <Text text="{pf2>Country}" />
+                           <Text text="{pf2>City}" />
+                           <Text text="{pf2>Postcode}" />
+                           <Text text="{pf2>PhoneOrFax}" />
+                           <Text text="{pf2>EmailOrWebsite}" />
+                           <Text text="{pf2>BvDId}" />
+                           <Text text="{pf2>Score}" />
+                           
+
+                        </cells>
+                     </ColumnListItem>
+                  </items>
+               </Table>
+               <smartForm:SmartForm id="smartFormColumn"
+		
+			 title="Information"
+      visible="false"
+			>
+      <smartForm:Group label="General">
+      	<smartForm:GroupElement label="Name">
+          <Text text="{pf4>/Name}"></Text>
+				</smartForm:GroupElement>
+
+				<smartForm:GroupElement label="Address">
+         <Text text="{pf4>/Address}"></Text>
+
+				</smartForm:GroupElement>
+
+        <smartForm:GroupElement label="PhoneOrFax">
+         <Text text="{pf4>/PhoneOrFax}"></Text>
+         </smartForm:GroupElement>
+  
+        <smartForm:GroupElement label="EmailOrWebsite">
+          <Text text="{pf4>/EmailOrWebsite}"></Text>
+           </smartForm:GroupElement>
+	<smartForm:GroupElement label="Tax ID">
+         <Text text="{pf4>/VAT_NUMBER}"></Text>
+				</smartForm:GroupElement>
+
+            	<smartForm:GroupElement label="LEI">
+         <Text text="{pf4>/LEI}"></Text>
+				</smartForm:GroupElement>
+
+            	<smartForm:GroupElement label="Company Number">
+         <Text text="{pf4>/TRADE_REGISTER_NUMBER}"></Text>
+				</smartForm:GroupElement>
+
+      </smartForm:Group>
+      
+
+      <smartForm:Group label="Classification">
+      <smartForm:GroupElement label="Industry Classification">
+         <Link text="{pf4>/Industry_Classification}" press="onIndustryClassfication"></Link>
+					
+				</smartForm:GroupElement>
+        <smartForm:GroupElement label="North American Industry Classification System">
+         <Text text="{pf4>/NICS}"></Text>
+					
+				</smartForm:GroupElement>
+        <smartForm:GroupElement label="U.S. Standard Industrial Classification system">
+         <Text text="{pf4>/SICS}"></Text>
+					
+				</smartForm:GroupElement>
+      </smartForm:Group>
+      </smartForm:SmartForm>
+
+<l:VerticalLayout id="sanctionTabVerticalID" class="sapUiContentPadding equalColumns" width="50%" visible="false">
+		<FlexBox class="columns">
+   
+     <List id="directListId" headerText="Direct Sanctions" items="{pf11>/sanctions}">
+            <items>
+               <ObjectListItem  title="{pf11>list}"  number="{path: 'pf11>since', formatter: '.formatDate'}" numberUnit="Since" highlight="Error"/>
+            </items>
+         
+				<layoutData>
+					<FlexItemData
+						growFactor="1"
+						baseSize="0"
+						backgroundDesign="Solid"
+						styleClass="sapUiTinyMargin" />
+				</layoutData>
+        </List>
+         <List id="extensionListId" headerText="Sanction by Extension" items="{pf11>/sanctionsByExt}">
+            <items>
+               <ObjectListItem  title="{pf11>list}"  number="{path: 'pf11>percentage', formatter: '.getNumberValueForPercentage'}" numberUnit="%"   highlight="{path: 'pf11>percentage', formatter: '.getHighlightState'}" />
+            </items>
+         <!-- Display the direct sanctions information -->
+    <layoutData>
+					<FlexItemData
+						growFactor="1"
+						baseSize="0"
+						backgroundDesign="Solid"
+						styleClass="sapUiTinyMargin" />
+				</layoutData>
+      </List>
+		</FlexBox>
+	</l:VerticalLayout>
+
+
+               <Table id="OwnershipTableId" items="{pf3>/}" visible="false" headerText="Majority OwnerShip Structure" showSeparators="Inner">
+                  <columns>
+                     <Column width="30%">
+                        <Text text="Entity Name" />
+                     </Column>
+                          <Column>
+                        <Text text="% Owned" />
+                     </Column>
+                       <Column>
+                        <Text text="Country" />
+                     </Column>
+                     <Column>
+                        <Text text="Direct Sanctions" />
+                     </Column>
+                     <Column>
+                        <Text text="Sanctioned by extension" />
+                     </Column>
+                   
+                
+
+                     <!-- Add more columns as needed -->
+                  </columns>
+                  <items>
+                     <ColumnListItem
+                      type="Active"
+         highlight="{path: 'pf3>', formatter: '.getRowHighlightForSanction'}">
+      
+                        <cells>
+                           <ObjectIdentifier title="{pf3>CSH_NAME}"/>
+                           <Text text="{pf3>CSH_DIRECT_PCT}" />
+                           <Text text="{pf3>CSH_COUNTRY_ISO_CODE}" />
+                           <Text text="{pf3>CSH_DirectAndDate}" class="{path: 'pf3>CSH_DirectAndDate', formatter: '.getTextColorForDirectSanctions'}"/>
+                           <Text text="{pf3>CSH_Sanction}" class="{path: 'pf3>CSH_Sanction', formatter: '.getTextColorForDirectSanctions'}"/>
+                           
+                           <!-- <Text text="{pf3>CSH_TOTAL_PCT}" /> -->
+                        </cells>
+                     </ColumnListItem>
+                  </items>
+               </Table>
+
+<smartForm:SmartForm id="smartFormColumn1"
+		
+			 title="BIS Copilot (Moody's)"
+			validationMode="Async"
+      visible="false"
+			/>
+ <FeedInput id="_IDGenFeedInput1"  post="onLLM" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Microsoft_365_Copilot_Icon.svg/1024px-Microsoft_365_Copilot_Icon.svg.png" class="sapUiSmallMarginTopBottom" placeholder="Ask BIS Copilot (Moody's)" visible="false"/>
+            <List id="_IDGenList1" showSeparators="Inner" items="{pf7>/FeedInput}" visible="false">
+                <FeedListItem id="_IDGenFeedListItem1" iconDensityAware="false" info="Reply" sender="{pf7>sender}" icon="{pf7>icon}"
+      text="{pf7>text}"
+      convertLinksToAnchorTags="All" />
+      </List>
+
+               <l:VerticalLayout
+    id="idVerticalLayoutSanction"
+		binding="{pf5>/}"
+		class="sapUiContentPadding"
+		visible="false"
+    width="100%">
+    
+		<ObjectIdentifier title="Sanction Summary" text="{pf5>Sanction}" titleActive="true" titlePress="titleClickedSanction"/>
+	</l:VerticalLayout>
+
+  <l:VerticalLayout
+    id="idVerticalLayoutOwnership"
+		binding="{pf6>/}"
+		class="sapUiContentPadding"
+		visible="false"
+    width="100%">
+    
+		<ObjectIdentifier title="Ownership Summary" text="{pf6>Sanction}" titleActive="true" titlePress="titleClickedOwnerShip"/>
+	</l:VerticalLayout>
+
+
+   <smartForm:SmartForm id="smartFormSearch" editable="false" layout="ResponsiveGridLayout" title="Retrieved Information" columnsXL="10"  visible="false">
+    
+  </smartForm:SmartForm> 
+
+
+ <l:VerticalLayout
+    id="idVerticalLayoutBingSearch"
+		binding="{pf12>/}"
+		class="sapUiContentPadding"
+		visible="false"
+    width="100%">
+    
+		<ObjectIdentifier title="Retrieved Information" text="{pf12>Sanction}" titleActive="false"/>
+	</l:VerticalLayout>
+
+
+<List id="_IDGenList3" showSeparators="Inner" items="{pf12>/FeedInput}" visible="false">
+                <FeedListItem id="_IDGenFeedListItem3" iconDensityAware="false" sender="{pf12>sender}" 
+      text="{pf12>text}"
+      convertLinksToAnchorTags="All" />
+      </List>
+  <smartForm:SmartForm id="smartFormColumn2"
+		
+			 title="BIS Copilot (Open Media)"
+      visible="false"
+			/>
+ <FeedInput id="_IDGenFeedInput2"  post="onBingSearch" icon="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Microsoft_365_Copilot_Icon.svg/1024px-Microsoft_365_Copilot_Icon.svg.png" class="sapUiSmallMarginTopBottom" placeholder="Ask me Anything" visible="false"/>
+            <List id="_IDGenList2" showSeparators="Inner" items="{pf14>/FeedInput}" visible="false">
+                <FeedListItem id="_IDGenFeedListItem2" iconDensityAware="false" info="Reply" sender="{pf14>sender}" icon="{pf14>icon}"
+      text="{pf14>text}"
+      convertLinksToAnchorTags="All" />
+      </List>
+              </content>
+         </IconTabBar>
+         <Button id="feedBackId" icon="sap-icon://thumb-down" text="Feedback"  class="myOverlayButton" press="onFeedback"
+          enabled="{feedbackModel>/enableFeedback}"/> <!-- // TAPERI BOC -->
+       </HBox>
+      </FlexBox>
+      </Page>
+   </App>
+</mvc:View>

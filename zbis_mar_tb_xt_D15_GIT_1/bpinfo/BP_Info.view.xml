@@ -1,0 +1,392 @@
+<mvc:View controllerName="bpinfo.BP_Info" 
+          xmlns:mvc="sap.ui.core.mvc" 
+		  xmlns:core="sap.ui.core" 
+		  xmlns:m="sap.m" 
+		  xmlns="sap.ui.table"
+		  xmlns:form="sap.ui.layout.form">
+	<m:App>
+		<m:Page title="{i18n>appTitle}">
+			<m:content>
+				<m:IconTabBar id="idIconTabBarMulti" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+					<m:items>
+						<m:IconTabFilter icon="sap-icon://address-book" visible="{= ${/to_AlertOrgAddressV2/results}.length > 0}" text="Org"
+							count="{= ${/to_AlertOrgAddressV2/results}.length }">
+							<Table id="tblOrgAddress" rows="{/to_AlertOrgAddressV2/results}" noDataText="{i18n>notFoundTitle}" selectionMode="None" fixedColumnCount="2">
+								<columns>
+									<!-- Alert Item Number -->
+									<Column width="auto">
+										<m:Label text="Alert Item #"/>
+										<template>
+											<m:Text id="txtAlertItem" maxLines="0" text="{AlertItemNumber}"/>
+										</template>
+									</Column>
+									<!-- Customer Type -->
+									<Column width="auto">
+										<m:Label text="Customer Type"/>
+										<template>
+											<m:Text id="txtOACustType" maxLines="0" text="{CustomerTypeDescription}"/>
+										</template>
+									</Column>
+									<!-- Address Status -->
+									<Column width="auto">
+										<m:Label text="Address Status"/>
+										<template>
+											<m:Text id="txtOAAddrStat" maxLines="0" text="{AddressStatusDescription}"/>
+										</template>
+									</Column>
+									<!-- Company Name -->
+									<Column width="auto">
+										<m:Label text="Name"/>
+										<template>
+											<m:Text id="txtOACompName" maxLines="0" text="{CompanyName}"/>
+										</template>
+									</Column>
+									<!-- Country -->
+									<Column width="auto">
+										<m:Label text="Country"/>
+										<template>
+											<m:Text id="txtOACountry" maxLines="0" text="{Country}"/>
+										</template>
+									</Column>
+									<!-- City -->
+									<Column width="auto">
+										<m:Label text="City+Region"/>
+										<template>
+											<m:Text id="txtOACity" maxLines="0" text="{City}"/>
+										</template>
+									</Column>
+									<!-- Street -->
+									<Column width="auto">
+										<m:Label text="Street"/>
+										<template>
+											<m:Text id="txtOAStreet" maxLines="0" text="{Street}"/>
+										</template>
+									</Column>
+									<!-- Postal Code -->
+									<Column width="auto">
+										<m:Label text="Post Code"/>
+										<template>
+											<m:Text id="txtOAPostCode" maxLines="0" text="{PostalCode}"/>
+										</template>
+									</Column>
+									<!-- Org Address History Changes-->
+									<!-- AddressHistory -->
+									<Column width="auto">
+										<m:Label text="Version No."/>
+										<template>
+											<m:Button icon="sap-icon://customer-history" visible="{= ${AddressHistoryCount} > 0}" text="{= ${AddressHistoryCount} + 1 }"
+												type="Transparent" press="onAddressHistoryLogPress">
+												<m:customData>
+													<core:CustomData key="addrDBKey" value="{OrgAddrDBKey}"/>
+												</m:customData>
+											</m:Button>
+										</template>
+									</Column>
+									<!-- Org Address History Changes-->
+								</columns>
+							</Table>
+						</m:IconTabFilter>
+						<!-- BEGIN Person Address Icon Tab Bar -->
+						<m:IconTabFilter icon="sap-icon://customer" text="Person" visible="{= ${/to_AlertPersonAddressV2/results}.length > 0}"
+							count="{= ${/to_AlertPersonAddressV2/results}.length }">
+							<Table id="tblPersonAddress" rows="{/to_AlertPersonAddressV2/results}" noDataText="{i18n>notFoundTitle}" selectionMode="None"
+								fixedColumnCount="2">
+								<columns>
+									<!-- Alert Item Number -->
+									<Column width="auto">
+										<m:Label text="Alert Item #"/>
+										<template>
+											<m:Text id="txtPAAlertItem" maxLines="0" text="{AlertItemNumber}"/>
+										</template>
+									</Column>
+									<!--Begin of changes by V-VETIK / 8-12-2021 / TR# D15K904686 -->
+									<!-- Customer Type --> 
+									<Column width="auto">
+										<m:Label text="Customer Type"/>
+										<template>
+											<m:Text id="txtPACustType" maxLines="0" text="{CustomerTypeDescription}"/>
+										</template>
+									</Column>
+									<!--End of changes by V-VETIK / 8-12-2021 / TR# D15K904686 -->
+									<!-- Address Status -->
+									<Column width="auto">
+										<m:Label text="Address Status"/>
+										<template>
+											<m:Text id="txtPAAddrStat" maxLines="0" text="{AddressStatusDescription}"/>
+										</template>
+									</Column>
+									<!-- First Name -->
+									<Column width="auto">
+										<m:Label text="First Name"/>
+										<template>
+											<m:Text id="txtPAFirstName" maxLines="0" text="{FirstName}"/>
+										</template>
+									</Column>
+									<!-- Middle Name -->
+									<Column width="auto">
+										<m:Label text="Middle Name"/>
+										<template>
+											<m:Text id="txtPAMiddleName" maxLines="0" text="{MiddleName}"/>
+										</template>
+									</Column>
+									<!-- Last Name -->
+									<Column width="auto">
+										<m:Label text="Last Name"/>
+										<template>
+											<m:Text id="txtPALastName" maxLines="0" text="{LastName}"/>
+										</template>
+									</Column>
+									<!-- Country -->
+									<Column width="auto">
+										<m:Label text="Country"/>
+										<template>
+											<m:Text id="txtPACountry" maxLines="0" text="{Country}"/>
+										</template>
+									</Column>
+									<!-- City -->
+									<Column width="auto">
+										<m:Label text="City+Region"/>
+										<template>
+											<m:Text id="txtPACity" maxLines="0" text="{City}"/>
+										</template>
+									</Column>
+									<!-- Street -->
+									<Column width="auto">
+										<m:Label text="Street"/>
+										<template>
+											<m:Text id="txtPAStreet" maxLines="0" text="{Street}"/>
+										</template>
+									</Column>
+									<!-- Postal Code -->
+									<Column width="auto">
+										<m:Label text="Post Code"/>
+										<template>
+											<m:Text id="txtPAPostCode" maxLines="0" text="{PostalCode}"/>
+										</template>
+									</Column>
+									<!-- Person Address History Changes-->
+									<!-- AddressHistory -->
+									<Column width="auto">
+										<m:Label text="Version No."/>
+										<template>
+											<m:Button icon="sap-icon://customer-history" visible="{= ${AddressHistoryCount} > 0}" text="{= ${AddressHistoryCount} + 1 }"
+												type="Transparent" press="onAddressHistoryLogPress">
+												<m:customData>
+													<core:CustomData key="addrDBKey" value="{PersAddrDBKey}"/>
+												</m:customData>
+											</m:Button>
+										</template>
+									</Column>
+									<!-- Person Address History Changes-->
+								</columns>
+							</Table>
+						</m:IconTabFilter>
+						<!-- END Person Icon IconTabBar -->
+						<!-- BEGIN Other Info V2 Tab -->
+						<m:IconTabFilter icon="sap-icon://add-contact" text="Oth Info" count="{= ${/to_BPOtherInfoV2/results}.length }">
+							<Table id="tblBPOtherInfoV2" rows="{/to_BPOtherInfoV2/results}" noDataText="{i18n>notFoundTitle}" selectionMode="None">
+								<columns>
+									<!-- Company Name -->
+									<!--	<Column width="auto">
+										<m:Label text="{i18n>cname}"/>
+										<template>
+											<m:Text id="txtBPInfoV2CompName" maxLines="0" text="{BPName}"/>
+										</template>
+									</Column> -->
+									<!-- Other Info Type -->
+									<Column width="auto">
+										<m:Label text="{i18n>itype}"/>
+										<template>
+											<m:Text id="txtBPInfoV2Type" maxLines="0" text="{OtherInfoType}"/>
+										</template>
+									</Column>
+									<!-- Other Info Value -->
+									<Column width="auto">
+										<m:Label text="{i18n>ivalue}"/>
+										<template>
+											<m:Text id="txtBPInfoV2Value" maxLines="0" text="{OtherInfoValue}"/>
+										</template>
+									</Column>
+									<!-- Last Changed On -->
+									<Column width="15em">
+										<m:Label text="Last Changed On"/>
+										<template>
+											<m:Text id="txtBPInfoV2LChangeDateTime" maxLines="0" text="{path:'BeginDateTime', type: 'sap.ui.model.type.DateTime'}"/>
+										</template>
+									</Column>
+									<!-- Last Changed On -->
+									<!--<Column width="15em">
+										<m:Label text="Last Changed On"/>
+										<template>
+											<m:Text id="txtBPInfoV2LChange" maxLines="0"
+												text="{path:'BeginDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', UTC:true }}"/>
+										</template>
+									</Column>-->
+									<!-- Last Changed Time -->
+									<!--<Column width="15em">
+										<m:Label text="Last Changed Time"/>
+										<template>
+											<m:Text id="txtBPInfoV2LChangeTim" maxLines="0"
+												text="{path:'BeginTime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern: 'KK:mm:ss a' , UTC:true }}"/>
+										</template>
+									</Column>-->
+									<!-- Change Count -->
+									<Column width="8em" tooltip="Version No">
+										<m:Label text="Version No"/>
+										<template>
+											<!-- <m:HBox alignItems="Center"> -->
+											<m:Text id="txtBPInfoV2ChangeCount" maxLines="0" text="{ChangeCount}"/>
+											<!--	<m:Button icon="sap-icon://history" type="Transparent" visible="{= ${ChangeCount} > 1}"/>
+											</m:HBox> -->
+										</template>
+									</Column>
+									<!-- Change Log Popup Button -->
+									<Column width="3em">
+										<m:Label text=""/>
+										<template>
+											<m:Button icon="sap-icon://history" type="Transparent" visible="{= ${ChangeCount} > 1}" press="onLogPress">
+												<m:customData>
+													<!-- dynamic binded data from OData model 
+													// retrieve the custom data value1
+    													TODO: oEvent.getSource().data("otherInfoKey");
+													-->
+													<core:CustomData key="otherInfoKey" value="{DBKey}"/>
+												</m:customData>
+											</m:Button>
+											<!--<m:Button icon="sap-icon://action" type="Transparent" press="onPress" ariaLabelledBy="actionButtonLabel"/>-->
+										</template>
+									</Column>
+								</columns>
+							</Table>
+						</m:IconTabFilter>
+						<!-- END Other Info V2 Tab -->
+						<!-- BEGIN Expired Other Info V2 Tab -->
+						<m:IconTabFilter icon="sap-icon://outdent" visible="{= ${/to_BPOtherInfoExpiredV2/results}.length > 0}" text="Expired Info"
+							count="{= ${/to_BPOtherInfoExpiredV2/results}.length }" iconColor="Negative">
+							<Table id="tblBPOtherInfoExpiredV2" rows="{/to_BPOtherInfoExpiredV2/results}" noDataText="{i18n>notFoundTitle}" selectionMode="None">
+								<columns>
+									<!-- Company Name -->
+									<!--	<Column width="auto">
+										<m:Label text="{i18n>cname}"/>
+										<template>
+											<m:Text id="txtBPInfoV2CompName" maxLines="0" text="{BPName}"/>
+										</template>
+									</Column> -->
+									<!-- Other Info Type -->
+									<Column width="auto">
+										<m:Label text="{i18n>itype}"/>
+										<template>
+											<m:Text id="txtBPInfoExpiredV2Type" maxLines="0" text="{OtherInfoType}"/>
+										</template>
+									</Column>
+									<!-- Other Info Value -->
+									<Column width="auto">
+										<m:Label text="{i18n>ivalue}"/>
+										<template>
+											<m:Text id="txtBPInfoExpiredV2Value" maxLines="0" text="{OtherInfoValue}"/>
+										</template>
+									</Column>
+									<Column width="15em">
+										<m:Label text="Last Changed On"/>
+										<template>
+											<m:Text id="txtBPInfoExpiredV2LChangeDateTime" maxLines="0" text="{path:'EndDateTime', type: 'sap.ui.model.type.DateTime'}"/>
+										</template>
+									</Column>
+									<!-- Last Changed On -->
+									<!--									<Column width="15em">
+										<m:Label text="Last Changed On"/>
+										<template>
+											<m:Text id="txtBPInfoExpiredV2LChange" maxLines="0"
+												text="{path:'EndDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', UTC:true }}"/>
+										</template>
+									</Column>-->
+									<!-- Last Changed Time -->
+									<!--									<Column width="15em">
+										<m:Label text="Last Changed Time"/>
+										<template>
+											<m:Text id="txtBPInfoExpiredV2LChangeTim" maxLines="0"
+												text="{path:'EndTime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern: 'KK:mm:ss a' , UTC:true }}"/>
+										</template>
+									</Column>-->
+									<!-- Change Count -->
+									<Column width="8em" tooltip="Version No">
+										<m:Label text="Version No"/>
+										<template>
+											<!-- <m:HBox alignItems="Center"> -->
+											<m:Text id="txtBPInfoExpiredV2ChangeCount" maxLines="0" text="{ChangeCount}"/>
+											<!--	<m:Button icon="sap-icon://history" type="Transparent" visible="{= ${ChangeCount} > 1}"/>
+											</m:HBox> -->
+										</template>
+									</Column>
+									<!-- Change Log Popup Button -->
+									<Column width="3em">
+										<m:Label text=""/>
+										<template>
+											<m:Button icon="sap-icon://history" type="Transparent" visible="{= ${ChangeCount} > 1}" press="onExpireLogPress">
+												<m:customData>
+													<core:CustomData key="otherInfoKey" value="{DBKey}"/>
+												</m:customData>
+											</m:Button>
+										</template>
+									</Column>
+								</columns>
+							</Table>
+						</m:IconTabFilter>
+						<!-- END Expired Other Info V2 Tab -->
+						<!-- BEGIN Alert Validity Timer Changes Tab -->
+						<m:IconTabFilter icon="sap-icon://accelerated" text="License Validity">
+						<form:SimpleForm id="FeedBackForm" editable="true" layout="ResponsiveGridLayout">
+		            	<form:content>
+                            <m:VBox id="_IDGenVBox1">
+                                <m:Label id="_IDGenLabel1"
+                                    text="Valid From"
+                                    labelFor="DP1"
+                                />
+                                <m:DatePicker
+                                    id="DP1"
+                                    placeholder="Enter Valid From"
+                                    value="{'path':'M1>/ValidFrom','type':'sap.ui.model.type.Date'
+                                    }"
+                                    editable= "{= ${M1>/AlertLC} === '02' &amp;&amp; ${M1>/PersResp} === ${M1>/sessionUser}}" 
+									width="20%" required="true"
+                                />
+                                <m:Label id="_IDGenLabel2"
+                                    text="Valid To"
+                                    labelFor="DP2"
+                                />
+                                <m:DatePicker
+                                    id="DP2"
+                                    placeholder="Enter Valid To"
+                                    value="{'path':'M1>/ValidTo','type':'sap.ui.model.type.Date'
+                                    }"
+                                   editable= "{= ${M1>/AlertLC} === '02' &amp;&amp; ${M1>/PersResp} === ${M1>/sessionUser}}"
+								   width="20%" required="true"
+                                />                         
+								<m:HBox>
+                                <m:Button id="idButtonSave"
+                                    text="Save"
+                                    press="onSave"
+									enabled="{= ${M1>/AlertLC} === '02' &amp;&amp; ${M1>/PersResp} === ${M1>/sessionUser}}"
+									type="Accept"
+                                />
+								<m:layoutData>
+								<m:FlexItemData growFactor="1" />
+								</m:layoutData>
+								<m:Button id="idButtonClear"
+                                    text="Clear"
+                                    press="onClear"
+									enabled="{= ${M1>/AlertLC} === '02' &amp;&amp; ${M1>/PersResp} === ${M1>/sessionUser}}"
+									type="Emphasized"
+                                />
+								</m:HBox>
+							</m:VBox>
+						</form:content>
+        				</form:SimpleForm> 
+                        </m:IconTabFilter>
+                        <!-- END License Validity Tab -->
+					</m:items>
+				</m:IconTabBar>
+			</m:content>
+		</m:Page>
+	</m:App>
+</mvc:View>

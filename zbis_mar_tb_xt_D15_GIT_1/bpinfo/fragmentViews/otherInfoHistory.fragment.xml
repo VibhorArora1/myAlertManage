@@ -1,0 +1,71 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:m="sap.m" xmlns="sap.ui.table">
+	<m:Dialog title="Infotype History" contentWidth = "75%">
+		<Table id="tblBPOtherInfoV2" rows="{
+												path: 'OtherInfoModel>/to_OtherInfoHistory/results',
+												sorter: {
+													path: 'EndDate',
+													descending : 'true'
+												}
+											}"  noDataText="{i18n>notFoundTitle}" selectionMode="None">
+			<columns>
+				<!-- Other Info Value -->
+				<Column width="auto">
+					<m:Label text="{i18n>ivalue}"/>
+					<template>
+						<m:Text id="txtBPHistoryValue" maxLines="0" text="{OtherInfoModel>OtherInfoValue}"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Valid From"/>
+					<template>
+						<m:Text id="txtBPHistoryFromDateTime" maxLines="0"
+							text="{path:'OtherInfoModel>BeginDateTime', type: 'sap.ui.model.type.DateTime'}"/>
+					</template>
+				</Column>
+				<!-- From Date -->
+				<!--<Column width="auto">
+					<m:Label text="From Date"/>
+					<template>
+						<m:Text id="txtBPHistoryFromDate" maxLines="0"
+							text="{path:'OtherInfoModel>BeginDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', UTC:true }}"/>
+					</template>
+				</Column>-->
+				<!-- From Time -->
+				
+				<!--<Column width="auto">
+					<m:Label text="From Time"/>
+					<template>
+						<m:Text id="txtBPHistoryFromTime" maxLines="0"
+							text="{path:'OtherInfoModel>BeginTime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern: 'KK:mm:ss a' , UTC:true }}"/>
+					</template>
+				</Column>-->
+				<Column width="auto">
+					<m:Label text="Valid To"/>
+					<template>
+						<m:Text id="txtBPHistoryToDateTime" maxLines="0"
+							text="{path:'OtherInfoModel>EndDateTime', type: 'sap.ui.model.type.DateTime'}"/>
+					</template>
+				</Column>
+				<!-- Till Date -->
+				<!--<Column width="auto">
+					<m:Label text="To Date"/>
+					<template>
+						<m:Text id="txtBPHistoryToDate" maxLines="0"
+							text="{path:'OtherInfoModel>EndDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', UTC:true }}"/>
+					</template>
+				</Column>-->
+				<!-- Till Time -->
+				<!--<Column width="auto">
+					<m:Label text="To Time"/>
+					<template>
+						<m:Text id="txtBPHistoryToTime" maxLines="0"
+							text="{path:'OtherInfoModel>EndTime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern: 'KK:mm:ss a' , UTC:true }}"/>
+					</template>
+				</Column>-->
+			</columns>
+		</Table>
+		<m:buttons>
+			<m:Button text="Close" press="closeDialog" type="Accept"/>
+		</m:buttons>
+	</m:Dialog>
+</core:FragmentDefinition>

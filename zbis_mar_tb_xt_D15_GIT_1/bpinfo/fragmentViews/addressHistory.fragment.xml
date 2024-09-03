@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:m="sap.m" xmlns="sap.ui.table">
+	<m:Dialog title="Address History" contentWidth="75%">
+		<Table id="tblOrgAddress" rows="{ path: 'AddrHistModel>/to_AddressHist/results', sorter: { path: 'ChangeNr', descending : 'true' } }"
+			selectionMode="None">
+			<columns>
+<!--				<Column width="auto">
+					<m:Label text="Change Date"/>
+					<template>
+						<m:Text id="txtAddrDate" maxLines="0"
+							text="{path:'AddrHistModel>ChangeDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long' } }"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Change Time"/>
+					<template>
+						<m:Text id="txtAddrTime" maxLines="0"
+							text="{path:'AddrHistModel>ChangeTime', type: 'sap.ui.model.odata.type.Time', source:{__edmtype: 'Edm.Time'}, formatOptions: { pattern: 'KK:mm:ss a' }}"/>
+					</template>
+				</Column>-->
+				<Column width="auto">
+					<m:Label text="Changed On"/>
+					<template>
+						<m:Text id="txtAddrDateTime" maxLines="0"
+							text="{path:'AddrHistModel>ChangedOn', type:'sap.ui.model.type.DateTime'}"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Change No."/>
+					<template>
+						<m:Text id="txtAddrchngNo" maxLines="0" text="{AddrHistModel>ChangeNr}"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Field Name"/>
+					<template>
+						<m:Text id="txtAddrName" maxLines="0" text="{AddrHistModel>FieldName}"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="Old Value"/>
+					<template>
+						<m:Text id="txtOldValue" maxLines="0" text="{AddrHistModel>OldValue}"/>
+					</template>
+				</Column>
+				<Column width="auto">
+					<m:Label text="New Value"/>
+					<template>
+						<m:Text id="txtNewValue" maxLines="0" text="{AddrHistModel>NewValue}"/>
+					</template>
+				</Column>
+			</columns>
+		</Table>
+		<m:buttons>
+			<m:Button text="Close" press="closeAddrDialog" type="Accept"/>
+		</m:buttons>
+	</m:Dialog>
+</core:FragmentDefinition>

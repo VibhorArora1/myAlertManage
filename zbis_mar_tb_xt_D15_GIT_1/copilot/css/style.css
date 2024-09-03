@@ -1,0 +1,60 @@
+/* Enter your custom styles here */
+
+.highlightedTextRed {
+  color: red; /* Set the desired text color for highlighting */
+  /* background-color: yellow;  */
+  /* Uncomment if you want to set background color */
+}
+.highlightedTextYellow {
+  color: rgb(215, 215, 8); /* Set the desired text color for highlighting */
+  /* background-color: yellow;  */
+  /* Uncomment if you want to set background color */
+}
+.highlightedTextGreen {
+  color: green; /* Set the desired text color for highlighting */
+  /* background-color: yellow;  */
+  /* Uncomment if you want to set background color */
+}
+
+/* BOC: Feedback Button* - TAPERI*/
+.myOverlayButton {
+  position: absolute;
+  top: 25px; /* Adjust the vertical position */
+  right: 10px; /*Adjust the horizontal position */
+  z-index: 100; /*Ensure it's above other elements */
+ }
+
+.myFlexContainer {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.flexItem {
+  flex: 1; /* Allow the IconTabBar to grow and shrink */
+  max-width: 100%; /* Ensure it doesn't exceed the container width */
+  /* display: flex; */
+  /* align-items: center; Center items vertically */
+  /* justify-content: center; Center items horizontally */
+}
+
+
+.fixedWidthIconTabBar {
+  /* width: 1500px; Set your desired fixed width */
+  max-width: 1000px;
+  flex-grow: 1;
+}
+@media (max-width: 768px) {
+  .flexItem {
+      max-width: 100%;
+  }
+
+  .myOverlayButton {
+      right: 5px; /* Adjust position for smaller screens */
+  }
+}
+
+.radioGroup {
+  padding-left: 20px; /* Adjust the value as needed */
+}
+/* EOC: Feedback Button* - TAPERI*/

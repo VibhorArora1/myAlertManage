@@ -1,0 +1,87 @@
+<mvc:View controllerName="dupalerts.Alert_Info" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:m="sap.m" xmlns="sap.ui.table"
+	xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<m:App>
+		<m:Page title="{i18n>appTitle}">
+			<m:content>
+				<Table id="tblDependentAlerts" rows="{/results}" noDataText="{i18n>notFoundTitle}" selectionMode="None" fixedColumnCount="1">
+					<rowSettingsTemplate>
+						<RowSettings highlight="{DueDaysStatus}" highlightStatus="{DueDaysStatus}"/>
+					</rowSettingsTemplate>
+					<columns>
+						<!-- Alert ID Column -->
+						<Column width="5rem" hAlign="Center">
+							<m:Label text="{i18n>alertId}" width="7rem" textAlign="Center"/>
+							<template>
+								<m:Link id="alertID" text="{AlertID}" press="handleAlertNavigation" cd:alertDBKey="{DBKey}"/>
+							</template>
+						</Column>
+						
+						<!-- Source Object Type -->
+						<Column width="10rem" hAlign="Center">
+							<m:Label text="{i18n>souObjTyp}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtSourceObjectType" maxLines="0" text="{SourceObjectTypeDescr}"/>
+							</template>
+						</Column>
+						<!-- Responsible User ID -->
+						<Column width="10rem" hAlign="Center">
+							<m:Label text="{i18n>resPerUsrId}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtResponsiblePerson" maxLines="0" text="{ResponsiblePerson}"/>
+							</template>
+						</Column>
+						
+						<!-- Creation Date -->
+						<Column width="11rem" hAlign="Center">
+							<m:Label text="{i18n>crtDate}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtCreationDate" maxLines="0"
+									text="{ path: 'CreationDateTime', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' } }"/>
+							</template>
+						</Column>
+						
+						<!-- Last Change Date & Time -->
+						<Column width="11rem" hAlign="Center">
+							<m:Label text="{i18n>lcDate}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtChangeDate" maxLines="0"
+									text="{ path: 'LastChangeDateTime', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' } }"/>
+							</template>
+						</Column>
+						
+						<!-- Lifecycle Status Text -->
+						<Column width="10rem" hAlign="Center">
+							<m:Label text="{i18n>lifeStat}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtLifeCycleStatus" maxLines="0" text="{to_LifecycleStatusHelp/Code_Text}"/>
+							</template>
+						</Column>
+						<!-- Completion Status Text -->
+						<Column width="10rem" hAlign="Center">
+							<m:Label text="{i18n>compStat}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtCompletionStatus" maxLines="0" text="{to_CompletionStatusHelp/Code_Text}"/>
+							</template>
+						</Column>
+						<!-- Workflow Phase Text -->
+						<Column width="10rem" hAlign="Center">
+							<m:Label text="{i18n>workStat}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtWorkflowPhase" maxLines="0" text="{to_WorkflowPhaseFieldDescr/WorkflowPhase_Text}"/>
+								
+							</template>
+						</Column>
+						
+						<!-- Investigation Reason text -->
+						<Column width="10rem" hAlign="Center">
+							<m:Label text="{i18n>invReason}" width="auto" textAlign="Center"/>
+							<template>
+								<m:Text id="txtInvReason" maxLines="0" text="{to_InvestigationReasonHelp/InvestigationReason_Text}"/>
+							</template>
+						</Column>
+					</columns>
+				</Table>
+			</m:content>
+		</m:Page>
+	</m:App>
+</mvc:View>

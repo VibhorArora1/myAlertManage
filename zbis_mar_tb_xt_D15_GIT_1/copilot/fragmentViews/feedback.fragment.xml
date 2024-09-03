@@ -1,0 +1,47 @@
+<core:FragmentDefinition
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:HBox="sap.m.HBox"
+>
+    <Dialog
+        title="Reason for Feedback?"
+        contentWidth="30%"
+        id="feedbackDialog"
+    >
+        <form:SimpleForm
+            id="FeedBackForm"
+            editable="true"
+            layout="ResponsiveGridLayout"
+        >
+            <form:content>
+                <VBox>
+                    <CheckBox id="idMoodyDI" text="Moody's data issue" selected="{feedbackDialogModel>/MoodyDI}"/>
+                    <CheckBox id="idBingDI" text="BingChat data issue" selected="{feedbackDialogModel>/BingChatDI}"/>
+                    <CheckBox id="idMoodyBingDI" text="Moody's + BingChat data issue" selected="{feedbackDialogModel>/MoodyBingChatDI}"/>
+                    <CheckBox id="idTechIssue" text="Technical issue" selected="{feedbackDialogModel>/TechIssue}" select="onTechIssueSelect"/>
+                    <VBox id="radioGroup" class="radioGroup" visible="{feedbackDialogModel>/TechIssue}">
+                        <RadioButtonGroup columns="2">
+                            <RadioButton id="idDataNotUseful" text="Data not useful" selected="{feedbackDialogModel>/DataNotUseful}"/>
+                            <RadioButton id="idIncorrectData" text="Incorrect data" selected="{feedbackDialogModel>/IncorrectData}"/>
+                        </RadioButtonGroup>
+                    </VBox>
+                </VBox>
+            </form:content>
+        </form:SimpleForm>
+        <buttons>
+            <Button
+                text="Cancel"
+                press="onCloseFeedback"
+                type="Accept"
+            />
+            <Button
+                text="Save"
+                press="onSaveFeedback"
+                type="Emphasized"
+            />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

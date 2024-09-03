@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+	<Dialog title="Legal and Trade Information" contentWidth = "75%">
+<l:VerticalLayout
+    id="idVerticalLayoutOwnership"
+		binding="{pf10>/}"
+		class="sapUiContentPadding"
+		visible="true"
+    	width="100%">
+    
+		<ObjectIdentifier title="Legal and Trade Information" text="{pf10>Sanction}" titleActive="false"/>
+	</l:VerticalLayout>
+ 
+		<buttons>
+			<Button  text="Close" press="closeDialog" type="Accept"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
