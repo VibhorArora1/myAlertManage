@@ -34,17 +34,17 @@ sap.ui.define(["sap/ui/core/UIComponent",
 			},
 
 			setAlertDBKey: function (sAlertDBKey) {
-				// getting container
-				// if (sap.ushell && sap.ushell.Container) {
-				// 	var oHash = sap.ushell.Container.getService("URLParsing").parseShellHash(window.location.hash);
-				// 	// rendering the object page
-				// 	var sSemanticObject = oHash.semanticObject;
-				// 	var sAction = oHash.action;
-				// }
-				// var sId = "application-" + sSemanticObject + "-" + sAction + "-component---object--alertHeaderReopenButton";
-				var mainModel = sap.ui.getCore().byId("application-ComplianceAlert-manage-component---object--alertHeaderReopenButton").getModel();
+				
+				if (sap.ushell && sap.ushell.Container) {
+					var oHash = sap.ushell.Container.getService("URLParsing").parseShellHash(window.location.hash);
+					// rendering the object page
+					var sSemanticObject = oHash.semanticObject;
+					var sAction = oHash.action;
+				}
+				var sId = "application-" + sSemanticObject + "-" + sAction + "-component---object--alertHeaderReopenButton";
+				// var mainModel = sap.ui.getCore().byId("application-ComplianceAlert-manage-component---object--alertHeaderReopenButton").getModel();
 				try {
-					// var mainModel = sap.ui.getCore().byId(sId).getModel();
+					var mainModel = sap.ui.getCore().byId(sId).getModel();
 					mainModel.attachBatchRequestCompleted(function (oEvent) {
 						// Check if the batch request is completed
 						if (oEvent.getParameter("success")) {
