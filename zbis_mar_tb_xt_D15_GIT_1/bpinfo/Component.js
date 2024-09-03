@@ -35,29 +35,42 @@ sap.ui.define(["sap/ui/core/UIComponent",
 
 			setAlertDBKey: function (sAlertDBKey) {
 
-				var mainModel = sap.ui.getCore().byId("application-ComplianceAlert-manage-component---object--alertHeaderReopenButton").getModel();
-				mainModel.attachBatchRequestCompleted(function (oEvent) {
-					// Check if the batch request is completed
-					if (oEvent.getParameter("success")) {
-						try {
-							var jsonString = oEvent.getParameters("response").response.responseText.match(/{.*}/s)[0];
-							var jsonObject = JSON.parse(jsonString);
-							var dataModel = view.getModel('M1').getData();
-							if (jsonObject.d) {
-								dataModel.AlertLC = jsonObject.d.LifecycleStatus;
-								dataModel.PersResp = jsonObject.d.ResponsiblePerson;
-								view.getModel('M1').setData(dataModel);
-								view.getModel('M1').refresh();
+				if (sap.ushell && sap.ushell.Container) {
+					var oHash = sap.ushell.Container.getService("URLParsing").parseShellHash(window.location.hash);
+					var sSemanticObject = oHash.semanticObject;
+					var sAction = oHash.action;
+				}
+				var sId = "application-" + sSemanticObject + "-" + sAction + "-component---object--alertHeaderReopenButton";
+				// var mainModel = sap.ui.getCore().byId("application-ComplianceAlert-manage-component---object--alertHeaderReopenButton").getModel();
+				try {
+					var mainModel = sap.ui.getCore().byId(sId).getModel();
+
+					mainModel.attachBatchRequestCompleted(function (oEvent) {
+						// Check if the batch request is completed
+						if (oEvent.getParameter("success")) {
+							try {
+								var jsonString = oEvent.getParameters("response").response.responseText.match(/{.*}/s)[0];
+								var jsonObject = JSON.parse(jsonString);
+								var dataModel = view.getModel('M1').getData();
+								if (jsonObject.d) {
+									dataModel.AlertLC = jsonObject.d.LifecycleStatus;
+									dataModel.PersResp = jsonObject.d.ResponsiblePerson;
+									view.getModel('M1').setData(dataModel);
+									view.getModel('M1').refresh();
+								}
+							} catch (e) {
+								console.log("JSON String:", jsonString);
 							}
-						} catch (e) {
-							console.log("JSON String:", jsonString);
+
+
+						} else {
+							console.log("Batch job failed.");
 						}
 
-
-					} else {
-						console.log("Batch job failed.");
-					}
-				});
+					});
+				} catch (e) {
+					console.log("Error in getting model", e);
+				}
 
 
 
@@ -155,7 +168,7 @@ sap.ui.define(["sap/ui/core/UIComponent",
 						json: true,
 						useBatch: false
 					});
-					
+
 					var dataModel1 = new sap.ui.model.json.JSONModel();
 
 					objAlertModel.read(timerServicePath, {
@@ -171,7 +184,7 @@ sap.ui.define(["sap/ui/core/UIComponent",
 								AlertLC: data.AlertLC,
 								sessionUser: sessionUser,
 								PersResp: data.PersResp,
-								Alert_DBKey:sAlertDBKey
+								Alert_DBKey: sAlertDBKey
 							})
 							//Set the view model
 							view.setModel(dataModel1, "M1")
